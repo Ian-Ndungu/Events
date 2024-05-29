@@ -4,6 +4,7 @@ import Home from "./pages/home/Home";
 import About from "./pages/about/About";
 import Contact from "./pages/contact/Contact";
 import Blog from "./pages/blog/Blog";
+import Ticket from "./pages/ticket/Ticket";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
           <Route path="/user-layout/about" element={<About />} />
           <Route path="/user-layout/contactus" element={<Contact />} />
           <Route path="/user-layout/blog" element={<Blog />} />
+          <Route path="user-layout/ticket-booking" element={<Ticket />} />
         </Route>
       </Routes>
     </>
