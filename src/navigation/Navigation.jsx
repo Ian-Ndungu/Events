@@ -6,14 +6,14 @@ import { Dropdown, Space } from "antd";
 const Navigation = () => {
   const navigate = useNavigate();
   const items = [
-    {
-      label: (
-        <NavLink to="/user-layout/event-filming" className="text-[16px]">
-          Event filming & Photography
-        </NavLink>
-      ),
-      key: "0",
-    },
+    // {
+    //   label: (
+    //     <NavLink to="/user-layout/event-filming" className="text-[16px]">
+    //       Event filming & Photography
+    //     </NavLink>
+    //   ),
+    //   key: "0",
+    // },
     {
       label: (
         <NavLink to="/user-layout/event-planning" className="text-[16px]">
@@ -42,8 +42,9 @@ const Navigation = () => {
   return (
     <div className="w-[100%] fixed top-0 z-50 h-[120px] bg-white border-b-[1px] shadow-md">
       <div className="flex items-center h-full justify-between w-[95%] mx-auto">
-        <div onClick={() => navigate("/")} className="font-bold cursor-pointer">
-          <img src="" alt="logo" className="w-[200px] " />
+        <div onClick={() => navigate("/")} className="font-bold cursor-pointer flex items-center">
+          <img src="/logo.jpeg" alt="logo" className="w-[120px] " />
+          <p className="font-extrabold text-[26px] mx-[-14px]">VeNtY</p>
         </div>
         <nav className="flex font-bold">
           <ul className="flex items-center gap-[20px]">

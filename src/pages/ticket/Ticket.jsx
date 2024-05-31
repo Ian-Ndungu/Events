@@ -1,6 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
+import BookTickets from "../bookticket/BookTicket";
 
 const Ticket = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedEventId, setSelectedEventId] = useState(null);
+
+  const handleEventClick = (eventId, isPast) => {
+    if (!isPast) {
+      setSelectedEventId(eventId);
+      setModalOpen(true);
+    }
+  };
+
+  const upcomingEvents = [
+    { id: 1, src: "/urbantone.png", title: "URBANTONE FEST", date: "11 MAY", location: "sk8city Nairobi", isPast: false },
+    { id: 2, src: "/dawasesh.jpeg", title: "DAWA SESH", date: "10 MAY", location: "Shelter, 33 Woodvale Groove, Westlands, Nairobi.", isPast: false },
+    { id: 3, src: "/element.jpeg", title: "ELEMENT", date: "03 MAY", location: "Shelter, 33 Woodvale Groove, Westlands, Nairobi.", isPast: false }
+  ];
+
+  const pastEvents = [
+    { id: 4, src: "/urbantone.png", title: "URBANTONE FEST", date: "11 MAY", location: "sk8city Nairobi", isPast: true },
+    { id: 5, src: "/dawasesh.jpeg", title: "DAWA SESH", date: "10 MAY", location: "Shelter, 33 Woodvale Groove, Westlands, Nairobi.", isPast: true },
+    { id: 6, src: "/element.jpeg", title: "ELEMENT", date: "03 MAY", location: "Shelter, 33 Woodvale Groove, Westlands, Nairobi.", isPast: true }
+  ];
+
   return (
     <div className="mt-[140px]">
       <div className="mx-auto my-[20px]">
@@ -10,129 +33,65 @@ const Ticket = () => {
               Upcoming events
             </p>
             <div className="items-center px-5 gap-[40px] w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-              <div className="max-w-xs p-4 bg-white shadow-md rounded-lg w-[360px] h-[420px]">
-                <img
-                  src="/urbantone.png"
-                  alt="screen"
-                  className="w-full h-3/3 object-cover"
-                />
-                <div>
-                  <p className="font-bold">URBANTONE FEST</p>
-                  <p className="mt-2 text-[14px] font-bold text-[#ef4444]">
-                    11 MAY
-                  </p>
-                  <p>sk8city Nairobi</p>
+              {upcomingEvents.map(event => (
+                <div
+                  key={event.id}
+                  className="max-w-xs p-4 bg-white shadow-md rounded-lg w-[360px] h-[420px] cursor-pointer"
+                  onClick={() => handleEventClick(event.id, event.isPast)}
+                >
+                  <img
+                    src={event.src}
+                    alt="screen"
+                    className="w-full h-3/3 object-cover"
+                  />
+                  <div>
+                    <p className="font-bold">{event.title}</p>
+                    <p className="mt-2 text-[14px] font-bold text-[#ef4444]">
+                      {event.date}
+                    </p>
+                    <p>{event.location}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="max-w-xs p-4 bg-white shadow-md rounded-lg w-[360px] h-[420px]">
-                <img
-                  src="/dawasesh.jpeg"
-                  alt="screen"
-                  className="w-full h-3/3 object-cover"
-                />
-                <div>
-                  <p className="font-bold">DAWA SESH</p>
-                  <p className="mt-2 text-[14px] font-bold text-[#ef4444]">
-                    10 MAY
-                  </p>
-                  <p>Shelter, 33 Woodvale Groove, Westlands, Nairobi.</p>
-                </div>
-              </div>
-              <div className="max-w-xs p-4 bg-white shadow-md rounded-lg w-[360px] h-[420px]">
-                <img
-                  src="/element.jpeg"
-                  alt="screen"
-                  className="w-full h-3/3 object-cover"
-                />
-                <div>
-                  <p className="font-bold">ELEMENT</p>
-                  <p className="mt-2 text-[14px] font-bold text-[#ef4444]">
-                    03 MAY
-                  </p>
-                  <p>Shelter, 33 Woodvale Groove, Westlands, Nairobi.</p>
-                </div>
-              </div>
-              <div className="max-w-xs p-4 bg-white shadow-md rounded-lg w-[360px] h-[420px]">
-                <img
-                  src="/element.jpeg"
-                  alt="screen"
-                  className="w-full h-3/3 object-cover"
-                />
-                <div>
-                  <p className="font-bold">ELEMENT</p>
-                  <p className="mt-2 text-[14px] font-bold text-[#ef4444]">
-                    03 MAY
-                  </p>
-                  <p>Shelter, 33 Woodvale Groove, Westlands, Nairobi.</p>
-                </div>
-              </div>
+              ))}
             </div>
             <div>
               <p className="text-[28px] font-bold leading-7 mb-[20px] text-justify mt-[40px]">
                 Past Events
               </p>
               <div className="items-center px-5 gap-[40px] w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <div className="max-w-xs p-4 bg-white shadow-md rounded-lg w-[360px] h-[420px]">
-                  <img
-                    src="/urbantone.png"
-                    alt="screen"
-                    className="w-full h-3/3 object-cover"
-                  />
-                  <div>
-                    <p className="font-bold">URBANTONE FEST</p>
-                    <p className="mt-2 text-[14px] font-bold text-[#ef4444]">
-                      11 MAY
-                    </p>
-                    <p>sk8city Nairobi</p>
+                {pastEvents.map(event => (
+                  <div
+                    key={event.id}
+                    className="max-w-xs p-4 bg-white shadow-md rounded-lg w-[360px] h-[420px] cursor-not-allowed"
+                    onClick={() => handleEventClick(event.id, event.isPast)}
+                  >
+                    <img
+                      src={event.src}
+                      alt="screen"
+                      className="w-full h-3/3 object-cover"
+                    />
+                    <div>
+                      <p className="font-bold">{event.title}</p>
+                      <p className="mt-2 text-[14px] font-bold text-[#ef4444]">
+                        {event.date}
+                      </p>
+                      <p>{event.location}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="max-w-xs p-4 bg-white shadow-md rounded-lg w-[360px] h-[420px]">
-                  <img
-                    src="/dawasesh.jpeg"
-                    alt="screen"
-                    className="w-full h-3/3 object-cover"
-                  />
-                  <div>
-                    <p className="font-bold">DAWA SESH</p>
-                    <p className="mt-2 text-[14px] font-bold text-[#ef4444]">
-                      10 MAY
-                    </p>
-                    <p>Shelter, 33 Woodvale Groove, Westlands, Nairobi.</p>
-                  </div>
-                </div>
-                <div className="max-w-xs p-4 bg-white shadow-md rounded-lg w-[360px] h-[420px]">
-                  <img
-                    src="/element.jpeg"
-                    alt="screen"
-                    className="w-full h-3/3 object-cover"
-                  />
-                  <div>
-                    <p className="font-bold">ELEMENT</p>
-                    <p className="mt-2 text-[14px] font-bold text-[#ef4444]">
-                      03 MAY
-                    </p>
-                    <p>Shelter, 33 Woodvale Groove, Westlands, Nairobi.</p>
-                  </div>
-                </div>
-                <div className="max-w-xs p-4 bg-white shadow-md rounded-lg w-[360px] h-[420px]">
-                  <img
-                    src="/element.jpeg"
-                    alt="screen"
-                    className="w-full h-3/3 object-cover"
-                  />
-                  <div>
-                    <p className="font-bold">ELEMENT</p>
-                    <p className="mt-2 text-[14px] font-bold text-[#ef4444]">
-                      03 MAY
-                    </p>
-                    <p>Shelter, 33 Woodvale Groove, Westlands, Nairobi.</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
       </div>
+      {selectedEventId && (
+        <BookTickets
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          eventId={selectedEventId}
+          fetchEventDetails={() => {}} // Add your event detail fetching function here
+        />
+      )}
     </div>
   );
 };

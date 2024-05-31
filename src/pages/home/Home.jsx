@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Ticket from "../ticket/Ticket";
+import Eventplan from "../eventplan/Eventplan";
 
 const home = () => {
   const navigate = useNavigate();
@@ -39,72 +41,17 @@ const home = () => {
         </div>
       </div>
       <div className="mt-[20px]">
-        <div className="w-[80%] mx-auto my-[20px]">
-          <p className="font-bold ">Event Planning</p>
+        <div className="w-[86%] mx-auto my-[20px]">
+          <p className="text-[28px] font-bold leading-7 mb-[20px] text-justify mt-[40px]">
+            Event Planning
+          </p>
+          <Eventplan/>
         </div>
       </div>
       <div className="mt-[20px]">
-        <div className="w-[80%] mx-auto my-[20px]">
-          <p className="font-bold">Tickets</p>
-          <div className="w-full p-[30px]">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[40px]">
-              <div className="max-w-xs p-4 bg-white shadow-md rounded-lg w-full h-[420px]">
-                <img
-                  src="/urbantone.png"
-                  alt="screen"
-                  className="w-full h-2/3 object-cover"
-                />
-                <div>
-                  <p className="font-bold">URBANTONE FEST</p>
-                  <p className="mt-2 text-[14px] font-bold text-[#ef4444]">
-                    11 MAY
-                  </p>
-                  <p>sk8city Nairobi</p>
-                </div>
-              </div>
-              <div className="max-w-xs p-4 bg-white shadow-md rounded-lg w-full h-[420px]">
-                <img
-                  src="/dawasesh.jpeg"
-                  alt="screen"
-                  className="w-full h-2/3 object-cover"
-                />
-                <div>
-                  <p className="font-bold">DAWA SESH</p>
-                  <p className="mt-2 text-[14px] font-bold text-[#ef4444]">
-                    10 MAY
-                  </p>
-                  <p>Shelter, 33 Woodvale Groove, Westlands, Nairobi.</p>
-                </div>
-              </div>
-              <div className="max-w-xs p-4 bg-white shadow-md rounded-lg w-full h-[420px]">
-                <img
-                  src="/element.jpeg"
-                  alt="screen"
-                  className="w-full h-2/3 object-cover"
-                />
-                <div>
-                  <p className="font-bold">ELEMENT</p>
-                  <p className="mt-2 text-[14px] font-bold text-[#ef4444]">
-                    03 MAY
-                  </p>
-                  <p>Shelter, 33 Woodvale Groove, Westlands, Nairobi.</p>
-                </div>
-              </div>
-              <div className="max-w-xs p-4 bg-white shadow-md rounded-lg w-full h-[420px]">
-                <img
-                  src="/element.jpeg"
-                  alt="screen"
-                  className="w-full h-2/3 object-cover"
-                />
-                <div>
-                  <p className="font-bold">ELEMENT</p>
-                  <p className="mt-2 text-[14px] font-bold text-[#ef4444]">
-                    03 MAY
-                  </p>
-                  <p>Shelter, 33 Woodvale Groove, Westlands, Nairobi.</p>
-                </div>
-              </div>
-            </div>
+        <div className="w-[90%] mx-auto my-[20px]">
+          <div>
+            <Ticket />
           </div>
         </div>
       </div>
