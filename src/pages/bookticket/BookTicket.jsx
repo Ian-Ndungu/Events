@@ -38,10 +38,11 @@ const BookTickets = ({ modalOpen, setModalOpen, fetchEventDetails }) => {
         await sendTicketEmail(email, ticketNumber);
         toast.success("Tickets booked successfully. Check your email for the ticket.");
         fetchEventDetails();
-        setModalOpen(false);
+        setModalOpen(false); // Close the modal after successful booking
         setPhoneNumber("");
         setEmail("");
         setSelectedTickets({});
+        console.log("Tickets Data:", tickets); // Log tickets data to the console
       } else {
         toast.error("Failed to process payment");
       }
