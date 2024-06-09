@@ -26,7 +26,7 @@ const Navigation = () => {
       Ticket Booking
     </NavLink>,
     <NavLink key="about" to="/user-layout/about" className="text-[16px]">
-      About Eventy
+      About Us
     </NavLink>,
     <NavLink key="contact" to="/user-layout/contactus" className="text-[16px]">
       Contact Us
