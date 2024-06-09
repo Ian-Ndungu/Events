@@ -1,4 +1,5 @@
 import axios from "axios";
+import base64 from "base-64";
 
 const DARAJA_API_BASE_URL = "https://sandbox.safaricom.co.ke";
 const DARAJA_CONSUMER_KEY = process.env.REACT_APP_DARAJA_CONSUMER_KEY;
@@ -8,15 +9,12 @@ const DARAJA_PASSKEY = process.env.REACT_APP_DARAJA_PASSKEY;
 const DARAJA_CALLBACK_URL = process.env.REACT_APP_DARAJA_CALLBACK_URL;
 
 const getDarajaToken = async () => {
-  const auth = Buffer.from(
-    `${DARAJA_CONSUMER_KEY}:${DARAJA_CONSUMER_SECRET}`
-  ).toString("base64");
+  const auth = base64.encode(`${DARAJA_CONSUMER_KEY}:${DARAJA_CONSUMER_SECRET}`);
   const response = await axios.get(
     `${DARAJA_API_BASE_URL}/oauth/v1/generate?grant_type=client_credentials`,
     {
       headers: {
         Authorization: `Basic ${auth}`,
-        z,
       },
     }
   );
@@ -25,13 +23,8 @@ const getDarajaToken = async () => {
 
 const processPayment = async (phoneNumber, amount) => {
   const token = await getDarajaToken();
-  const timestamp = new Date()
-    .toISOString()
-    .replace(/[-:.TZ]/g, "")
-    .slice(0, 14);
-  const password = Buffer.from(
-    `${DARAJA_SHORTCODE}${DARAJA_PASSKEY}${timestamp}`
-  ).toString("base64");
+  const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, "").slice(0, 14);
+  const password = base64.encode(`${DARAJA_SHORTCODE}${DARAJA_PASSKEY}${timestamp}`);
 
   const paymentData = {
     BusinessShortCode: DARAJA_SHORTCODE,

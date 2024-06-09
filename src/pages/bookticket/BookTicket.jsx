@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import { processPayment } from "../../sdk/darajaApi";
 
-const BookTickets = ({ modalOpen, setModalOpen, fetchEventDetails }) => {
+const BookTickets = ({ modalOpen, setModalOpen, fetchEventDetails, event }) => {
   const [tickets] = useState([
     { id: 1, type: "Standard", price: 1, available: 100 },
     { id: 2, type: "VIP", price: 1, available: 50 },
@@ -32,7 +32,14 @@ const BookTickets = ({ modalOpen, setModalOpen, fetchEventDetails }) => {
         return sum + (ticket.price * selectedTickets[key]);
       }, 0);
 
+      console.log("Phone Number:", phoneNumber);
+      console.log("Email:", email);
+      console.log("Selected Tickets:", selectedTickets);
+      console.log("Total Amount:", totalAmount);
+
       const paymentResponse = await processPayment(phoneNumber, totalAmount);
+      console.log("Payment Response:", paymentResponse);
+
       if (paymentResponse.ResponseCode === "0") {
         const ticketNumber = generateTicketNumber();
         await sendTicketEmail(email, ticketNumber);
@@ -42,24 +49,29 @@ const BookTickets = ({ modalOpen, setModalOpen, fetchEventDetails }) => {
         setPhoneNumber("");
         setEmail("");
         setSelectedTickets({});
-        console.log("Tickets Data:", tickets); // Log tickets data to the console
       } else {
         toast.error("Failed to process payment");
       }
     } catch (error) {
+      console.error("Error booking tickets:", error);
       toast.error("Failed to book tickets");
     }
   };
 
   return (
     <Modal
-      title="Book Tickets"
+      title={`Book Tickets for ${event.title}`}
       centered
       open={modalOpen}
       onOk={handleBookTickets}
       onCancel={() => setModalOpen(false)}
       width={900}
     >
+      <div>
+        <p>{event.title}</p>
+        <p>{event.date}</p>
+        <p>{event.location}</p>
+      </div>
       <div className="min-h-[300px]">
         <List
           itemLayout="horizontal"

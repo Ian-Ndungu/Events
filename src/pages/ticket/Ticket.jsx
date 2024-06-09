@@ -3,11 +3,11 @@ import BookTickets from "../bookticket/BookTicket";
 
 const Ticket = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedEventId, setSelectedEventId] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
-  const handleEventClick = (eventId, isPast) => {
-    if (!isPast) {
-      setSelectedEventId(eventId);
+  const handleEventClick = (event) => {
+    if (!event.isPast) {
+      setSelectedEvent(event);
       setModalOpen(true);
     }
   };
@@ -37,7 +37,7 @@ const Ticket = () => {
                 <div
                   key={event.id}
                   className="max-w-xs p-4 bg-white shadow-md rounded-lg w-[360px] h-[420px] cursor-pointer"
-                  onClick={() => handleEventClick(event.id, event.isPast)}
+                  onClick={() => handleEventClick(event)}
                 >
                   <img
                     src={event.src}
@@ -63,7 +63,7 @@ const Ticket = () => {
                   <div
                     key={event.id}
                     className="max-w-xs p-4 bg-white shadow-md rounded-lg w-[360px] h-[420px] cursor-not-allowed"
-                    onClick={() => handleEventClick(event.id, event.isPast)}
+                    onClick={() => handleEventClick(event)}
                   >
                     <img
                       src={event.src}
@@ -84,11 +84,11 @@ const Ticket = () => {
           </div>
         </div>
       </div>
-      {selectedEventId && (
+      {selectedEvent && (
         <BookTickets
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
-          eventId={selectedEventId}
+          event={selectedEvent}
           fetchEventDetails={() => {}} // Add your event detail fetching function here
         />
       )}
