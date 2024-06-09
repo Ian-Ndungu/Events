@@ -37,7 +37,7 @@ const Navigation = () => {
   ];
 
   return (
-    <div className="w-full fixed top-0 z-50 bg-white border-b-[1px] shadow-md">
+    <div className="w-full fixed top-0 z-50  h-[120px] bg-white border-b-[1px] shadow-md">
       <div className="flex items-center justify-between w-full max-w-screen-lg mx-auto px-4 py-3">
         <div
           onClick={() => navigate("/")}
