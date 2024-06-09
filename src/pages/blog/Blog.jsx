@@ -63,14 +63,14 @@ const Blog = () => {
   return (
     <div className="mt-[140px]">
       <div className="w-[80%] mx-auto my-[20px]">
-        <div className="w-full flex items-center justify-between px-[20px] gap-[40px] ">
+        <div className="w-full flex flex-wrap items-center justify-between px-[20px] gap-[40px] ">
           {BlogDetails.map((blog) => (
             <div
               key={blog.id}
-              className="max-w-md p-6 bg-white shadow-md rounded-lg w-[940px] h-[440px] cursor-pointer"
+              className="max-w-[100%] md:max-w-[30%] p-6 bg-white shadow-md rounded-lg w-full md:w-[45%] h-[440px] cursor-pointer"
               onClick={() => handleBlogClick(blog)}
             >
-              <img src={blog.image} alt="blog" />
+              <img src={blog.image} alt="blog" className="mb-4" />
               <p
                 className="overflow-hidden"
                 style={{
@@ -86,7 +86,7 @@ const Blog = () => {
           ))}
         </div>
       </div>
-      <Modal visible={!!selectedBlog} onCancel={handleCloseModal} footer={null}>
+      <Modal open={!!selectedBlog} onCancel={handleCloseModal} footer={null}>
         {selectedBlog && (
           <>
             <img src={selectedBlog.image} alt="blog" />
