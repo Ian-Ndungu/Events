@@ -1,78 +1,80 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { DownOutlined } from "@ant-design/icons";
-import { Dropdown, Space } from "antd";
+import { DownOutlined, MenuOutlined } from "@ant-design/icons";
+import { Dropdown, Space,Menu } from "antd";
 
 const Navigation = () => {
   const navigate = useNavigate();
-  const items = [
-    // {
-    //   label: (
-    //     <NavLink to="/user-layout/event-filming" className="text-[16px]">
-    //       Event filming & Photography
-    //     </NavLink>
-    //   ),
-    //   key: "0",
-    // },
-    {
-      label: (
-        <NavLink to="/user-layout/event-planning" className="text-[16px]">
-          Event & Wedding Planning
-        </NavLink>
-      ),
-      key: "1",
-    },
-    {
-      label: (
-        <NavLink to="/user-layout/ticket-booking" className="text-[16px]">
-          Ticket Booking
-        </NavLink>
-      ),
-      key: "2",
-    },
-    {
-      type: "divider",
-    },
-    {
-      label: "3rd menu item",
-      key: "3",
-    },
+  const [menuVisible, setMenuVisible] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuVisible(!menuVisible);
+  };
+
+  const closeMenu = () => {
+    setMenuVisible(false);
+  };
+
+  const Respo = [
+    <NavLink key="home" to="/" className="text-[16px]">
+      Home
+    </NavLink>,
+    <NavLink key="event" to="/user-layout/event-planning" className="text-[16px]">
+      Event & Wedding Planning
+    </NavLink>,
+    <NavLink key="ticket" to="/user-layout/ticket-booking" className="text-[16px]">
+      Ticket Booking
+    </NavLink>,
+    <NavLink key="about" to="/user-layout/about" className="text-[16px]">
+      About Eventy
+    </NavLink>,
+    <NavLink key="contact" to="/user-layout/contactus" className="text-[16px]">
+      Contact Us
+    </NavLink>,
+    <NavLink key="blog" to="/user-layout/blog" className="text-[16px]">
+      Blog
+    </NavLink>,
   ];
 
   return (
-    <div className="w-[100%] fixed top-0 z-50 h-[120px] bg-white border-b-[1px] shadow-md">
-      <div className="flex items-center h-full justify-between w-[95%] mx-auto">
-        <div onClick={() => navigate("/")} className="font-bold cursor-pointer flex items-center">
-          <img src="/logo.jpeg" alt="logo" className="w-[120px] " />
-          <p className="font-extrabold text-[26px] mx-[-14px]">VeNtY</p>
+    <div className="w-full fixed top-0 z-50 bg-white border-b-[1px] shadow-md">
+      <div className="flex items-center justify-between w-full max-w-screen-lg mx-auto px-4 py-3">
+        <div
+          onClick={() => navigate("/")}
+          className="font-bold cursor-pointer flex items-center"
+        >
+          <img src="/logo.jpeg" alt="logo" className="w-16 mr-2" />
+          <p className="font-extrabold text-xl">VeNtY</p>
         </div>
-        <nav className="flex font-bold">
-          <ul className="flex items-center gap-[20px]">
-            <NavLink to="/" className="text-[16px]">
-              Home
-            </NavLink>
-            <NavLink to="/user-layout/about" className="text-[16px]">
-              About Us
-            </NavLink>
+        <nav className="flex items-center space-x-6 md:hidden">
+          <MenuOutlined
+            className="text-xl cursor-pointer"
+            onClick={toggleMenu}
+          />
+          {menuVisible && (
             <Dropdown
-              menu={{
-                items,
-              }}
+              overlay={
+                <Menu>
+                  {Respo.map((item, index) => (
+                    <Menu.Item key={index}>{item}</Menu.Item>
+                  ))}
+                </Menu>
+              }
               trigger={["click"]}
             >
-              <a onClick={(e) => e.preventDefault()}>
+              <a onClick={(e) => e.preventDefault()} className="text-xl cursor-pointer">
                 <Space>
-                  Services
-                  <DownOutlined />
+                  Menu <DownOutlined />
                 </Space>
               </a>
             </Dropdown>
-            <NavLink to="/user-layout/contactus" className="text-[16px]">
-              Contact Us
-            </NavLink>
-            <NavLink to="/user-layout/blog" className="text-[16px]">
-              Blog
-            </NavLink>
+          )}
+        </nav>
+        <nav className="hidden md:flex font-bold">
+          <ul className="flex items-center gap-6">
+            {Respo.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
           </ul>
         </nav>
       </div>

@@ -25,62 +25,58 @@ const Ticket = () => {
   ];
 
   return (
-    <div className="mt-[140px]">
-      <div className="mx-auto my-[20px]">
-        <div className="w-full flex items-center justify-between px-[20px]">
-          <div>
-            <p className="text-[28px] font-bold leading-7 mb-[20px] text-justify">
-              Upcoming events
-            </p>
-            <div className="items-center px-5 gap-[40px] w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-              {upcomingEvents.map(event => (
-                <div
-                  key={event.id}
-                  className="max-w-xs p-4 bg-white shadow-md rounded-lg w-[360px] h-[420px] cursor-pointer"
-                  onClick={() => handleEventClick(event)}
-                >
-                  <img
-                    src={event.src}
-                    alt="screen"
-                    className="w-full h-3/3 object-cover"
-                  />
-                  <div>
-                    <p className="font-bold">{event.title}</p>
-                    <p className="mt-2 text-[14px] font-bold text-[#ef4444]">
-                      {event.date}
-                    </p>
-                    <p>{event.location}</p>
-                  </div>
+    <div className="mt-8 md:mt-16">
+      <div className="mx-auto my-8 md:my-16">
+        <div className="w-full px-4">
+          <p className="text-2xl font-bold leading-7 mb-4 text-center md:text-left">
+            Upcoming Events
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+            {upcomingEvents.map((event) => (
+              <div
+                key={event.id}
+                className="max-w-xs p-4 bg-white shadow-md rounded-lg cursor-pointer"
+                onClick={() => handleEventClick(event)}
+              >
+                <img
+                  src={event.src}
+                  alt="Event"
+                  className="w-full h-48 object-cover rounded-md mb-4"
+                />
+                <div>
+                  <p className="font-bold text-xl">{event.title}</p>
+                  <p className="mt-2 text-sm font-semibold text-red-500">
+                    {event.date}
+                  </p>
+                  <p className="text-sm">{event.location}</p>
                 </div>
-              ))}
-            </div>
-            <div>
-              <p className="text-[28px] font-bold leading-7 mb-[20px] text-justify mt-[40px]">
-                Past Events
-              </p>
-              <div className="items-center px-5 gap-[40px] w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                {pastEvents.map(event => (
-                  <div
-                    key={event.id}
-                    className="max-w-xs p-4 bg-white shadow-md rounded-lg w-[360px] h-[420px] cursor-not-allowed"
-                    onClick={() => handleEventClick(event)}
-                  >
-                    <img
-                      src={event.src}
-                      alt="screen"
-                      className="w-full h-3/3 object-cover"
-                    />
-                    <div>
-                      <p className="font-bold">{event.title}</p>
-                      <p className="mt-2 text-[14px] font-bold text-[#ef4444]">
-                        {event.date}
-                      </p>
-                      <p>{event.location}</p>
-                    </div>
-                  </div>
-                ))}
               </div>
-            </div>
+            ))}
+          </div>
+          <p className="text-2xl font-bold leading-7 mb-4 text-center md:text-left mt-8 md:mt-16">
+            Past Events
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+            {pastEvents.map((event) => (
+              <div
+                key={event.id}
+                className="max-w-xs p-4 bg-white shadow-md rounded-lg cursor-not-allowed opacity-50"
+                onClick={() => handleEventClick(event)}
+              >
+                <img
+                  src={event.src}
+                  alt="Event"
+                  className="w-full h-48 object-cover rounded-md mb-4"
+                />
+                <div>
+                  <p className="font-bold text-xl">{event.title}</p>
+                  <p className="mt-2 text-sm font-semibold text-red-500">
+                    {event.date}
+                  </p>
+                  <p className="text-sm">{event.location}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

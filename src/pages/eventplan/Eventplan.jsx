@@ -51,9 +51,9 @@ const Eventplan = () => {
 
   return (
     <>
-      <div className="min-h-screen flex items-center mx-[30px]">
-        <div className="bg-white p-8 rounded shadow-md w-full max-w-lg">
-          <h2 className="text-2xl font-bold mb-6">
+      <div className="min-h-screen flex flex-col md:flex-row mx-4 md:mx-0">
+        <div className="bg-white p-8 rounded shadow-md w-full max-w-lg mb-8 md:mr-8">
+          <h2 className="text-2xl font-bold mb-6 text-center md:text-left">
             Book an Event Planning Service
           </h2>
           <div className="mb-4">
@@ -112,62 +112,48 @@ const Eventplan = () => {
             </Button>
           </div>
         </div>
-        <Modal
-          title="Confirm Booking"
-          centered
-          open={modalOpen}
-          onOk={confirmBooking}
-          onCancel={() => setModalOpen(false)}
-          width={600}
-        >
-          <div>
-            <p>
-              <strong>Name:</strong> {formData.name}
+        <div className="w-full md:w-3/4 mx-auto md:ml-8">
+          <div className="w-full md:w-[92%] md:m-[38px]">
+            <p className="text-lg font-bold mb-4">
+              Event Accessories And Equipment For Hire
             </p>
-            <p>
-              <strong>Email:</strong> {formData.email}
-            </p>
-            <p>
-              <strong>Phone:</strong> {formData.phone}
-            </p>
-            <p>
-              <strong>Event Type:</strong> {formData.eventType}
-            </p>
-            <p>
-              <strong>Event Date:</strong> {formData.eventDate}
-            </p>
-            <p>
-              <strong>Additional Details:</strong> {formData.additionalDetails}
-            </p>
+            <div className="text-sm">
+              Are you looking for event accessories and equipment for hire in
+              Kenya? We are the leading suppliers of event rental supplies in
+              Kenya and we are known to provide top-notch services to
+              individuals and event firms when it comes to event setting up and
+              provision of state-of-the-art event equipment and accessories.
+              Below are some of the event services and equipment we provide for
+              hire in Kenya.
+              <br />
+              <ul className="list-disc ml-6">
+                <li>Performance Stage and Podium for Hire</li>
+                <li>LED Screens for Hire</li>
+                <li>Sound Systems for Hire</li>
+                <li>Lighting Systems for Hire</li>
+              </ul>
+              We also provide tents for hire and all services come with a
+              professional setup team that will ensure all your event
+              accessories and equipment are in place as per the plan and stick
+              around in case of any changes and emergencies.
+            </div>
           </div>
-        </Modal>
-        <ToastContainer />
-        <div className="w-[40%] m-[38px]">
-          <p className="text-[18px] font-bold mb-[14px]">
-            Event Accessories And Equipment For Hire??
-          </p>
-          <p>
-            Are you looking for event accessories and equipment for hire in
-            Kenya? We are the leading suppliers of event rental supplies in
-            Kenya and we are known to provide top notch services to individuals
-            and event firms when it comes to event setting up and provision of
-            state of the art event equipment and accessories. Below are some of
-            the event services and equipment we provide for hire in Kenya.
-            <br/>
-            <li>Performance Stage and Podium for Hire</li>
-            <li>LED Screens for Hire</li>
-            <li>Sound Systems for Hire</li>
-           <li>Lighting Systems for Hire</li>
-            <br /> We also provide tents for hire and all services comes with a
-            professional setup team that will ensure all your event accessories
-            and equipment are in place as per the plan and stick around in case
-            of any changes and emergencies.
-          </p>
         </div>
       </div>
-      <div className="mt-[40px]">
+      <div className="mt-8">
         <Filming />
       </div>
+      <Modal
+        title="Confirm Booking"
+        centered
+        open={modalOpen}
+        onOk={confirmBooking}
+        onCancel={() => setModalOpen(false)}
+        width={600}
+      >
+        {/* Display booking confirmation details */}
+      </Modal>
+      <ToastContainer />
     </>
   );
 };
