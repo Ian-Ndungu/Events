@@ -34,7 +34,7 @@ const Contact = () => {
         <div className="max-w-md p-6 bg-white shadow-md rounded-lg">
           <p className="text-2xl font-bold mb-4">FOR INQUIRIES OR QUESTIONS</p>
           <p className="mb-4">
-            Please use the form below or email us at hello@eventyevents.com.
+            Please use the form below or email us at hello@eventy.com.
           </p>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
