@@ -2,6 +2,7 @@ import { Modal, InputNumber, List, Input, Button } from "antd";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { processPayment } from "../../sdk/darajaApi";
+import { init } from "emailjs-com";
 
 const BookTickets = ({ modalOpen, setModalOpen, fetchEventDetails, event }) => {
   const [tickets] = useState([
@@ -12,6 +13,10 @@ const BookTickets = ({ modalOpen, setModalOpen, fetchEventDetails, event }) => {
   const [selectedTickets, setSelectedTickets] = useState({});
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
+
+  const generateTicketNumber = () => {
+    return `TICKET-${Math.floor(Math.random() * 1000000)}`;
+  };
 
   const handleTicketChange = (ticketId, value) => {
     setSelectedTickets({
@@ -28,8 +33,8 @@ const BookTickets = ({ modalOpen, setModalOpen, fetchEventDetails, event }) => {
       }
 
       const totalAmount = Object.keys(selectedTickets).reduce((sum, key) => {
-        const ticket = tickets.find(t => t.id === parseInt(key));
-        return sum + (ticket.price * selectedTickets[key]);
+        const ticket = tickets.find((t) => t.id === parseInt(key));
+        return sum + ticket.price * selectedTickets[key];
       }, 0);
 
       console.log("Phone Number:", phoneNumber);
@@ -42,8 +47,10 @@ const BookTickets = ({ modalOpen, setModalOpen, fetchEventDetails, event }) => {
 
       if (paymentResponse.ResponseCode === "0") {
         const ticketNumber = generateTicketNumber();
-        await sendTicketEmail(email, ticketNumber);
-        toast.success("Tickets booked successfully. Check your email for the ticket.");
+        sendTicketEmail(email, ticketNumber);
+        toast.success(
+          "Tickets booked successfully. Check your email for the ticket."
+        );
         fetchEventDetails();
         setModalOpen(false); // Close the modal after successful booking
         setPhoneNumber("");
@@ -55,6 +62,26 @@ const BookTickets = ({ modalOpen, setModalOpen, fetchEventDetails, event }) => {
     } catch (error) {
       console.error("Error booking tickets:", error);
       toast.error("Failed to book tickets");
+    }
+  };
+
+  init("uZ9YRGKNjK1faDgv0");
+
+  const sendTicketEmail = async (email, ticketNumber) => {
+    try {
+      const templateParams = {
+        to_email: email,
+        ticket_number: ticketNumber,
+      };
+
+      const serviceID = "eventy_ag065gm";
+      const templateID = "ytemplate_kwu44gw";
+      const userID = "uZ9YRGKNjK1faDgv0";
+
+      await emailjs.send(serviceID, templateID, templateParams, userID);
+      console.log(`Sending ticket ${ticketNumber} to ${email}`);
+    } catch (error) {
+      console.error("Error sending email:", error);
     }
   };
 
@@ -109,14 +136,3 @@ const BookTickets = ({ modalOpen, setModalOpen, fetchEventDetails, event }) => {
 };
 
 export default BookTickets;
-
-// Dummy function to generate a unique ticket number
-const generateTicketNumber = () => {
-  return `TICKET-${Math.floor(Math.random() * 1000000)}`;
-};
-
-// Dummy function to send the ticket to the user's email
-const sendTicketEmail = async (email, ticketNumber) => {
-  // Implement the logic to send the ticket email here
-  console.log(`Sending ticket ${ticketNumber} to ${email}`);
-};
