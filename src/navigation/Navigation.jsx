@@ -37,14 +37,14 @@ const Navigation = () => {
   ];
 
   return (
-    <div className="w-full fixed top-0 z-50  h-[120px] bg-white border-b-[1px] shadow-md">
-      <div className="flex items-center justify-between w-full max-w-screen-lg mx-auto px-4 py-3">
+    <div className="w-[100%] fixed top-0 z-50  h-[120px] bg-white border-b-[1px] shadow-md">
+      <div className="flex items-center justify-between w-full  mx-auto px-4 py-3">
         <div
           onClick={() => navigate("/")}
           className="font-bold cursor-pointer flex items-center"
         >
-          <img src="/logo.jpeg" alt="logo" className="w-16 mr-2" />
-          <p className="font-extrabold text-xl">VeNtY</p>
+          <img src="/logo.jpeg" alt="logo" className="w-16 mr-1" />
+          <p className="font-extrabold text-xl ml-[-9px]">VeNtY</p>
         </div>
         <nav className="flex items-center space-x-6 md:hidden">
           <MenuOutlined
